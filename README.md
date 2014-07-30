@@ -12,7 +12,7 @@ npm install sticky-session
 ## Usage
 
 ```javascript
-var sticky = require('sticky-sesion');
+var sticky = require('sticky-session');
 
 sticky(require('http').createServer(function(req, res) {
   res.end('worker: ' + process.env.NODE_WORKER_ID);
@@ -23,7 +23,7 @@ sticky(require('http').createServer(function(req, res) {
 Simple
 
 ```javascript
-var sticky = require('sticky-sesion');
+var sticky = require('sticky-session');
 
 sticky(function() {
   // This code will be executed only in slave workers
