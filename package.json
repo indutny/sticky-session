@@ -2,12 +2,38 @@
   "name": "sticky-session",
   "description": "Sticky session balancer based on a `cluster` module",
   "version": "0.1.0",
-  "author": "Fedor Indutny <fedor.indutny@gmail.com>",
+  "author": {
+    "name": "Fedor Indutny",
+    "email": "fedor.indutny@gmail.com"
+  },
   "main": "./lib/sticky-session",
-  "dependencies": {},
+  "dependencies": {
+    "random-js": "^1.0.4"
+  },
   "engines": {
     "node": ">= 0.6.0"
   },
   "devDependencies": {},
-  "optionalDependencies": {}
+  "optionalDependencies": {},
+  "_id": "sticky-session@0.1.0",
+  "dist": {
+    "shasum": "3308a3e1ddbe5955cb79e1dedfd32edc43c9ef81",
+    "tarball": "http://registry.npmjs.org/sticky-session/-/sticky-session-0.1.0.tgz"
+  },
+  "_from": "sticky-session@>=0.1.0 <0.2.0",
+  "_npmVersion": "1.2.14",
+  "_npmUser": {
+    "name": "fedor.indutny",
+    "email": "fedor.indutny@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "fedor.indutny",
+      "email": "fedor.indutny@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_shasum": "3308a3e1ddbe5955cb79e1dedfd32edc43c9ef81",
+  "_resolved": "https://registry.npmjs.org/sticky-session/-/sticky-session-0.1.0.tgz",
+  "readme": "ERROR: No README data found!"
 }
