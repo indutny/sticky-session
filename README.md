@@ -19,11 +19,11 @@ before they reach the node Application.
 If we proxy any connection, the real IP will be lost. The original implementation of sticky-sessions
 worked only on layer 3 of the OSI Model. But the Information we need, is right now on layer 4.
 
-**Note:** Only versions smaller than 0.11.4 and greater than 0.9.6 are supported.
+**Note:** Only versions smaller than 0.11.14 and greater than 0.9.6 are supported.
 The reason for this is that the behavior of onread in net.js has changed:
-https://github.com/joyent/node/blob/v0.11.4-release/lib/net.js#L487-L519
+https://github.com/joyent/node/blob/v0.11.14-release/lib/net.js#L492-L514
 
-Versions greater than 0.11.4 will be supported as soon as 0.11.x gets stable, 
+Versions greater than 0.11.14 will be supported as soon as 0.11.x gets stable, 
 as it may change until the stable release several times. 
 
 ## Installation
