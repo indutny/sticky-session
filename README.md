@@ -85,7 +85,6 @@ Specifies on which event sticky-sessions should **listen** if **isSyncable**
 is set to **true**.
 
 
-
 **Note:** The options parameter is omittable if you do not need it or can be a 
 number to specify the process count (old call behavior).
 
