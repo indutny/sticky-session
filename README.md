@@ -184,12 +184,12 @@ var server = sticky(options, function() {
   console.log('server started on 3000 port');
 });
 
-server.on( 'connection', function( socket )
+server.on('connection', function(socket)
 {
   // ... awesome stuff
 
-  server.emit( 'mySyncEventCall' );
-} );
+  server.emit('mySyncEventCall');
+});
 
 ```
 Socket.io, synchronized
