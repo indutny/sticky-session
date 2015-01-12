@@ -5,21 +5,25 @@ A simple performant way to use [socket.io](http://socket.io/) with a
 
 ## Technical
 
-Sticky Sessions are Hash Balanced by IP. Optionally layer4 header informations, for proxied connections, can be hashed.
+Sticky Sessions are Hash Balanced by IP. Optionally layer4 header 
+informations, for proxied connections, can be hashed.
 
 ### Prolog to Proxied connections
 
-If you're using a proxy, like you do in many constellations, e.g. using a varnish as cache, using a *Cloudflare like* CDN or
-using DDoS Protections which are build on a so called *reverse proxy Server*.
-There are many cases where you may not be able to avoid proxying the users requests,
-before they reach the node Application.
+If you're using a proxy, like you do in many constellations, e.g. using a 
+varnish as cache, using a *Cloudflare like* CDN or using DDoS Protections 
+which are build on a so called *reverse proxy Server*.
+There are many cases where you may not be able to avoid proxying the users 
+requests,before they reach the node Application.
 
 #### The Problem:
 
-If we proxy any connection, the real IP will be lost. The original implementation of sticky-sessions
-worked only on layer 3 of the OSI Model. But the Information we need, is right now on layer 4.
+If we proxy any connection, the real IP will be lost. The original 
+implementation of sticky-sessions worked only on layer 3 of the OSI Model. 
+But the Information we need, is right now on layer 4.
 
-**Note:** Only versions smaller than 0.11.14 and greater than 0.9.6 are supported.
+**Note:** Only versions smaller than 0.11.14 and greater than 0.9.6 are 
+supported.
 The reason for this is that the behavior of onread in net.js has changed:
 https://github.com/joyent/node/blob/v0.11.14-release/lib/net.js#L492-L514
 
@@ -34,7 +38,8 @@ npm install sticky-session
 
 ## Configuration
 
-You can optionally configure everything by the first parameter, by providing the following object:
+You can optionally configure everything by the first parameter, by providing 
+the following object:
 
 ```javascript
 var options = {
@@ -50,19 +55,25 @@ var options = {
 
 ### num
 
-Specifies the **process count** and is omittable. If omitted the core count of the processor will be used instead.
+Specifies the **process count** and is omittable. If omitted the core count 
+of the processor will be used instead.
 
 ### proxy
 
-Specifies if the layer 4 patching should be used or not, **needed if behind a proxy**.
+Specifies if the layer 4 patching should be used or not, 
+**needed if behind a proxy**.
 
 ### header
 
-Specifies the header containing the **real user IP** and is omittable. If omitted the header defaults to x-forwarded-for. Also the header is **case-insenstive**.
+Specifies the header containing the **real user IP** and is omittable. If 
+omitted the header defaults to x-forwarded-for. Also the header is 
+**case-insenstive**.
 
 ### sync
 
-Object containing information to **manually call** the sync of the **initial packet** and is also omittable. If omitted the behavior defaults to not syncing.
+Object containing information to **manually call** the sync of the 
+**initial packet** and is also omittable. If omitted the behavior defaults 
+to not syncing.
 
 #### isSyncable
 
@@ -70,11 +81,13 @@ Specifies if sync is used or not.
 
 #### event
 
-Specifies on which event sticky-sessions should **listen** if **isSyncable** is set to **true**.
+Specifies on which event sticky-sessions should **listen** if **isSyncable** 
+is set to **true**.
 
 
 
-**Note:** The options parameter is omittable if you do not need it or can be a number to specify the process count (old call behavior).
+**Note:** The options parameter is omittable if you do not need it or can be a 
+number to specify the process count (old call behavior).
 
 ## Usage
 
