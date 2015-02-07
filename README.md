@@ -53,6 +53,32 @@ Sticky-sessions module is balancing requests using their IP address. Thus
 client will always connect to same worker server, and socket.io will work as
 expected, but on multiple processes!
 
+```javascript
+var sticky = require('sticky-session');
+
+var options = {
+  trustedAddresses: ['127.0.0.1']
+};
+
+sticky(options, require('http').createServer(function(req, res) {
+  res.end('worker: ' + process.env.NODE_WORKER_ID);
+})).listen(3000, function() {
+  console.log('server started on 3000 port');
+});
+```
+Simple + reverse proxy support
+
+## Reasoning
+
+In order to determine the real originating address for a client, we have to
+bypass any reverse proxies that may exist between the client and our server.
+
+sticky-session will parse the HTTP request and check the X-Forwarded-For header
+for any matches with options.trustedAddresses. This allows the hash to skip the
+proxy IP address. Otherwise, the IP will always appear to come from the reverse
+proxy and only a single worker will ever be used since the hash will never
+change.
+
 #### LICENSE
 
 This software is licensed under the MIT License.
