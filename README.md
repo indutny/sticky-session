@@ -14,34 +14,20 @@ npm install sticky-session
 ```javascript
 var sticky = require('sticky-session');
 
-sticky(require('http').createServer(function(req, res) {
+var server = require('http').createServer(function(req, res) {
   res.end('worker: ' + process.env.NODE_WORKER_ID);
-})).listen(3000, function() {
-  console.log('server started on 3000 port');
 });
+
+if (sticky.listen(server, 3000)) {
+  // Master code
+  server.once('listening', function() {
+    console.log('server started on 3000 port');
+  });
+} else {
+  // Worker code
+}
 ```
 Simple
-
-```javascript
-var sticky = require('sticky-session');
-
-sticky(function() {
-  // This code will be executed only in slave workers
-
-  var http = require('http'),
-      io = require('socket.io');
-
-  var server = http.createServer(function(req, res) {
-    // ....
-  });
-  io.listen(server);
-
-  return server;
-}).listen(3000, function() {
-  console.log('server started on 3000 port');
-});
-```
-Socket.io
 
 ## Reasoning
 
@@ -57,7 +43,7 @@ expected, but on multiple processes!
 
 This software is licensed under the MIT License.
 
-Copyright Fedor Indutny, 2012.
+Copyright Fedor Indutny, 2015.
 
 Permission is hereby granted, free of charge, to any person obtaining a
 copy of this software and associated documentation files (the

@@ -4,10 +4,20 @@
   "version": "0.1.0",
   "author": "Fedor Indutny <fedor.indutny@gmail.com>",
   "main": "./lib/sticky-session",
-  "dependencies": {},
+  "dependencies": {
+    "ip": "^1.0.0"
+  },
   "engines": {
     "node": ">= 0.6.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "debug": "^2.2.0",
+    "jscs": "^2.1.1",
+    "jshint": "^2.8.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "jscs lib/*.js lib/**/*.js && jshint lib/*.js lib/**/*.js && node test/test-basic.js"
+  },
   "optionalDependencies": {}
 }
