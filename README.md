@@ -11,7 +11,8 @@ npm install sticky-session
 
 ##### Note about `node` version
 
-`sticky-session` requires `node` to be version at least `0.12.0` because it relies on the `net.createServer`'s [`pauseOnConnect` flag](https://nodejs.org/api/net.html#net_net_createserver_options_connectionlistener).
+`sticky-session` requires `node` to be at least `0.12.0` because it relies on
+`net.createServer`'s [`pauseOnConnect` flag](https://nodejs.org/api/net.html#net_net_createserver_options_connectionlistener).
 
 ## Usage
 
