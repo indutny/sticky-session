@@ -9,6 +9,10 @@ A simple performant way to use [socket.io](http://socket.io/) with a
 npm install sticky-session
 ```
 
+##### Note about `node` version
+
+`sticky-session` requires `node` to be version at least `0.12.0` because it relies on the `net.createServer`'s [`pauseOnConnect` flag](https://nodejs.org/api/net.html#net_net_createserver_options_connectionlistener).
+
 ## Usage
 
 ```javascript
@@ -38,6 +42,8 @@ different workers, which will break handshake protocol.
 Sticky-sessions module is balancing requests using their IP address. Thus
 client will always connect to same worker server, and socket.io will work as
 expected, but on multiple processes!
+
+A deeper, step-by-step explanation on how this works can be found in [`elad/node-cluster-socket.io`](https://github.com/elad/node-cluster-socket.io)
 
 #### LICENSE
 
