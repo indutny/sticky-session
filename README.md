@@ -18,12 +18,12 @@ var server = require('http').createServer(function(req, res) {
 });
 
 if (sticky.listen(server, 3000)) {
-  // Master code
+  // Worker code
   server.once('listening', function() {
     console.log('server started on 3000 port');
   });
 } else {
-  // Worker code
+  // Master code
 }
 ```
 Simple
