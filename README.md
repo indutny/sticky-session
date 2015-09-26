@@ -17,8 +17,8 @@ var server = require('http').createServer(function(req, res) {
   res.end('worker: ' + process.env.NODE_WORKER_ID);
 });
 
-if (sticky.listen(server, 3000)) {
-  // Worker code
+if (!sticky.listen(server, 3000)) {
+  // Master code
   server.once('listening', function() {
     console.log('server started on 3000 port');
   });
