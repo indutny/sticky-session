@@ -1,7 +1,7 @@
 {
   "name": "sticky-session",
   "description": "Sticky session balancer based on a `cluster` module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Fedor Indutny <fedor.indutny@gmail.com>",
   "main": "./lib/sticky-session",
   "dependencies": {
