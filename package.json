@@ -13,5 +13,23 @@
   },
   "devDependencies": {
     "recluster": "^0.4.3"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spion/sticky-session.git"
+  },
+  "keywords": [
+    "sticky",
+    "session",
+    "listen",
+    "recluster",
+    "balancer"
+  ],
+  "bugs": {
+    "url": "https://github.com/spion/sticky-session/issues"
+  },
+  "homepage": "https://github.com/spion/sticky-session#readme"
 }
