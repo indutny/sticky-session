@@ -1,7 +1,7 @@
 {
   "name": "sticky-listen",
   "description": "Sticky listener based on Fedor Indutny's sticky-sessions",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "author": "Gorgi Kosev <gorgi.kosev@gmail.com>",
   "main": "index.js",
   "engines": {
