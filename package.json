@@ -12,6 +12,6 @@
     "test": "node test/test-basic.js"
   },
   "devDependencies": {
-    "recluster": "^0.4.2"
+    "recluster": "^0.4.3"
   }
 }

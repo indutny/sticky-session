@@ -1,6 +1,6 @@
 # sticky-listen
 
-A simple performant way to use socket.io with [recluster][1], based on
+A simple performant way to use socket.io with [recluster][recluster], based on
 Fedor's sticky-session
 
 ## Installation
@@ -11,7 +11,7 @@ npm install sticky-listen
 
 ## Usage
 
-In your `cluster.js` that uses [recluster][1], use `sticky.createBalancer`
+In your `cluster.js` that uses [recluster][recluster], use `sticky.createBalancer`
 to create a sticky balancing server.
 
 ```js
@@ -34,7 +34,8 @@ console.log("spawned cluster, kill -s SIGUSR2", process.pid, "to reload");
 
 // Added for the sticky listener:
 
-var balancer = sticky.createBalancer(cluster.activeWorkers, {
+var balancer = sticky.createBalancer({
+  activeWorkers: cluster.activeWorkers,
   maxRetries: 5,
   retryDelay: 100
 });
@@ -62,11 +63,15 @@ process.send({cmd: 'ready'})
 
 ## Acknowledgement
 
-This module is based on Fedor Indutny's [sticky-session](https://github.com/indutny/sticky-session),
+This module is based on Fedor Indutny's [sticky-session][sticky-session],
 but it decouples the worker management logic, enabling you to use any cluster
 library (such as recluster). The only requirement is that `createBalancer`
-needs to be passed `activeWorkers`, a function that always returns an array
-of all the workers that are capable of receiving new connections.
+needs to be passed `activeWorkers`, a function that returns a hash containing
+
+* a field `length`, the number of worker slots that serve requests
+* for every key `0..length`, a field that contains a [worker object][api-cluster-worker]
+  of a worker that is capable of receiving new connections. If a worker isn't
+  ready at that slot, the field should be `null`
 
 ## API
 
@@ -82,15 +87,6 @@ to be specified.
 For use from the master process
 
 Creates a new master balancer server that balances between worker servers.
-The available options are:
-
-* `activeWorkers` - A function that returns an array of the workers that are
-   presently able to serve connections. For recluster based balancers that
-   would be `cluster.activeWorkers`
-* `retryDelay` - If there are no workers available at the moment, retry after
-  `retryDelay` miliseconds
-* `maxRetries` - how many retries to attempt after giving up and sending a
-  502 Bad Gateway error to the client.
 
 Returns a regular `net.Server`. Call server.listen(port) to start listening
 for connections and balancing those connections across the cluster.
@@ -98,7 +94,31 @@ for connections and balancing those connections across the cluster.
 Sticky sessions are achieved based on the IP address of the client - requests
 from the same IP are redirected to the same worker index.
 
-#### LICENSE
+The available options are
+
+##### `activeWorkers`
+
+A function that returns a hash of the worker slots. For recluster based
+balancers that would be `cluster.activeWorkers`. The hash should contain:
+
+* a field `length`, the number of worker slots that serve requests
+* for every key `0..length`, a field that contains a [worker object][api-cluster-worker]
+  of a worker that is capable of receiving new connections. If a worker isn't
+  ready at that slot, the field should be `null`
+
+
+##### `retryDelay`
+
+If there are no worker available to serve the client, retry finding one after
+`retryDelay` miliseconds.
+
+##### `maxRetries`
+
+The number of retries to attempt before giving up and sending a 502 Bad Gateway
+error to the client.
+
+
+## LICENSE
 
 This software is licensed under the MIT License.
 
@@ -123,4 +143,6 @@ DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
 USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[1]: https://github.com/doxout/recluster
+[recluster]: https://github.com/doxout/recluster
+[api-cluster-worker]: https://nodejs.org/api/cluster.html#cluster_class_worker
+[sticky-session]: (https://github.com/indutny/sticky-session)
