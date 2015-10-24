@@ -1,23 +1,17 @@
 {
-  "name": "sticky-session",
-  "description": "Sticky session balancer based on a `cluster` module",
-  "version": "1.0.2",
-  "author": "Fedor Indutny <fedor.indutny@gmail.com>",
-  "main": "./lib/sticky-session",
-  "dependencies": {
-    "debug": "^2.2.0",
-    "ip": "^1.0.0"
-  },
+  "name": "sticky-listen",
+  "description": "Sticky listener based on Fedor Indutny's sticky-sessions",
+  "version": "1.0.0",
+  "author": "Gorgi Kosev <gorgi.kosev@gmail.com>",
+  "main": "index.js",
   "engines": {
     "node": ">= 0.12.0"
   },
-  "devDependencies": {
-    "jscs": "^2.1.1",
-    "jshint": "^2.8.0"
-  },
   "license": "MIT",
   "scripts": {
-    "test": "jscs lib/*.js lib/**/*.js && jshint lib/*.js lib/**/*.js && node test/test-basic.js"
+    "test": "node test/test-basic.js"
   },
-  "optionalDependencies": {}
+  "devDependencies": {
+    "recluster": "^0.4.2"
+  }
 }
