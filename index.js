@@ -10,8 +10,9 @@ function createBalancer(options) {
 exports.listen = listen;
 
 function listen(server) {
-    process.on('message', function(msg, socket) {
+    process.on('message', function(msg, socket, data) {
         if (msg === 'sticky:balance' && socket != null) {
+            if (data != null) socket.push(data)
             server.emit('connection', socket);
         }
     });

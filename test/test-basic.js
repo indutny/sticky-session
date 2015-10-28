@@ -36,8 +36,11 @@ function test() {
             }, done).end()
         }
 
+        var sticky = null;
         function done(res) {
-            assert(res.headers['x-sticky']);
+            if (sticky == null) sticky = res.headers['x-sticky']
+            assert(res.headers['x-sticky'] == sticky);
+            sticky = res.headers['x-sticky']
             res.resume();
             if (--waiting === 0)
             process.exit(0);
