@@ -35,6 +35,7 @@ console.log("spawned cluster, kill -s SIGUSR2", process.pid, "to reload");
 // Added for the sticky listener:
 
 var balancer = sticky.createBalancer({
+  behindProxy: false,
   activeWorkers: cluster.activeWorkers,
   maxRetries: 5,
   retryDelay: 100
@@ -117,6 +118,11 @@ If there are no worker available to serve the client, retry finding one after
 The number of retries to attempt before giving up and sending a 502 Bad Gateway
 error to the client.
 
+##### `behindProxy`
+
+If you use this option, sticky-listen will read the headers and look for
+`x-forwarded-for` when reading the IP address of the client. This enables the
+balancer to work well even behind proxies such as HAProxy or nginx.
 
 ## LICENSE
 
