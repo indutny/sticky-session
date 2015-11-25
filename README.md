@@ -11,10 +11,11 @@ npm install sticky-session
 ## Usage
 
 ```javascript
+var cluster = require('cluster'); // Only required if you want the worker id
 var sticky = require('sticky-session');
 
 var server = require('http').createServer(function(req, res) {
-  res.end('worker: ' + process.env.NODE_WORKER_ID);
+  res.end('worker: ' + cluster.worker.id);
 });
 
 if (!sticky.listen(server, 3000)) {
@@ -23,7 +24,7 @@ if (!sticky.listen(server, 3000)) {
     console.log('server started on 3000 port');
   });
 } else {
-  // Master code
+  // Worker code
 }
 ```
 Simple
