@@ -17,7 +17,8 @@
   },
   "license": "MIT",
   "scripts": {
-    "test": "jscs lib/*.js lib/**/*.js && jshint lib/*.js lib/**/*.js && node test/test-basic.js"
+    "lint": "jscs lib/*.js lib/**/*.js && jshint lib/*.js lib/**/*.js",
+    "test": "npm run lint && (echo test/*-test.js | xargs node)"
   },
   "optionalDependencies": {}
 }
