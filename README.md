@@ -18,7 +18,9 @@ var server = require('http').createServer(function(req, res) {
   res.end('worker: ' + cluster.worker.id);
 });
 
-if (!sticky.listen(server, 3000)) {
+var options = {env:{"foo":"Some Environment Variables (optional)"}};
+
+if (!sticky.listen(server, 3000, options)) {
   // Master code
   server.once('listening', function() {
     console.log('server started on 3000 port');
@@ -29,6 +31,30 @@ if (!sticky.listen(server, 3000)) {
 ```
 Simple
 
+## Options
+The options object is optional and can be passed in as a third parameter to sticky.listen.
+### env
+Object: An object containing key/value environment variables that each worker will receive.
+### host
+String: A string value that the server will bind to as its host.
+### workers
+Integer: The number of workers to bring up. Defaults to the number of available cores.
+### returnInstance
+Boolean: Affects what is returned by the sticky.listen function. Defaults to `false`.
+When false: return `false` for tha master cluster process, and `true` to workers.
+When true: return the server instance to the master cluster process, and `false` to workers.
+```
+var serverInstance = sticky.listen(server, 3000, {returnInstance: true});
+if(serverInstance !== false){
+    //Master code
+    server.once('listening', function() {
+        var address = serverInstance.address();
+        console.log("Server listening on " + address.address + ":" + address.port");
+    });
+} else {
+    //Worker code
+}
+```
 ## Reasoning
 
 Socket.io is doing multiple requests to perform handshake and establish
