@@ -5,6 +5,11 @@ var http = require('http');
 
 var PORT = 13845;
 
+setTimeout(function(){
+  console.error("Test time exceeded");
+  process.exit(1);
+}, 5000);
+
 var done = true;
 
 var server = http.createServer(function(req, res) {
